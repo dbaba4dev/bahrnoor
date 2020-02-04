@@ -112,3 +112,5 @@ Route::get('/customer/restore/{id}', ['uses'=>'CustomersController@restore', 'as
 Route::post('/customer/profile/update/{id}',['uses'=>'CustomersController@update', 'as'=>'customer.profile.update']);
 
 Route::get('/customers/locations', ['uses'=>'CustomersController@locations', 'as'=>'customers.locations']);
+
+Route::resource('customer/area', 'CustomerAreasController');

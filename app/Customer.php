@@ -16,4 +16,9 @@ class Customer extends Model
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }

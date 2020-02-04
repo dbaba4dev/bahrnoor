@@ -171,10 +171,26 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{route('customers')}}"><i class="fa fa-circle-o"></i> All Customers</a></li>
-                            <li><a href="{{route('customer.create')}}"><i class="fa fa-circle-o"></i> New Customers</a></li>
-                            <li><a href="{{route('customers.trashes')}}"><i class="fa fa-circle-o"></i> Deactivated Customers</a></li>
-                            <li><a href="{{route('customers.locations')}}"><i class="fa fa-circle-o"></i> Customers Locations</a></li>
 
+                                <li><a href="{{route('customer.create')}}"><i class="fa fa-circle-o"></i> New Customers</a></li>
+
+                            <li><a href="{{route('customers.trashes')}}"><i class="fa fa-circle-o"></i> Deactivated Customers</a></li>
+{{--                            <li><a href="{{route('customers.locations')}}"><i class="fa fa-circle-o"></i> Customers Locations</a></li>--}}
+                            <li class="treeview">
+                                <a href="#"><i class="fa fa-circle-o"></i> Customer's Areas
+                                    <span class="pull-right-container">
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{route('area.index')}}"><i class="fa fa-circle-o"></i> All Areas</a></li>
+                                    <li class="">
+                                        <a href="{{route('area.create')}}"><i class="fa fa-circle-o"></i> New Area
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 

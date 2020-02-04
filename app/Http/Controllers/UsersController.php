@@ -46,7 +46,7 @@ class UsersController extends Controller
 //        dd($request->all());die();
         $this->validate($request, [
             'name'=>'required|unique:users',
-            'email'=>'required|unique:users,email'
+            'email'=>'required|unique:users|email'
         ]);
 
         $user = User::create([
