@@ -12,7 +12,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Customers</a></li>
-            <li class="active">All customers</li>
+            <li class="active">Deactivated customers</li>
         </ol>
         <hr style="border: solid 0.5px #a3a3a3">
     </section>
@@ -22,9 +22,9 @@
     <section class="content">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
-            <div class="box box-primary">
+            <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Customers list</h3>
+                    <h3 class="box-title">Deactivated Customers</h3>
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
@@ -48,7 +48,8 @@
                                 @foreach($customers as $customer)
                                     <tr>
                                         <td>
-                                            <img  src="{{empty($customer->profile->avatar) ? asset('uploads/customers/images/customer_avatar.png') :  asset($customer->profile->avatar)}}"
+                                            <img  src="{{empty(\App\Profile::where('customer_id',$customer->id)->onlyTrashed()->first()->avatar) ?
+                                            asset('uploads/customers/images/customer_avatar.png') :  asset(\App\Profile::where('customer_id',$customer->id)->onlyTrashed()->first()->avatar)}}"
                                                   alt="" height="50px" width="50px" class="img-circle">
                                         </td>
                                         <td>{{$customer->name}}</td>
@@ -56,11 +57,11 @@
                                         <td>{{$customer->area->name}}</td>
                                         <td>{{$customer->employee->name}}</td>
                                         <td>&#8358 {{$customer->credit_limit}}</td>
-                                        <td>{{$customer->profile->phone}}</td>
-                                        <td>{{$customer->profile->address}}</td>
+                                        <td>{{\App\Profile::where('customer_id',$customer->id)->onlyTrashed()->first()->phone}}</td>
+                                        <td>{{\App\Profile::where('customer_id',$customer->id)->onlyTrashed()->first()->address}}</td>
 
-                                        <td><a href="{{route('customer.edit',['id'=>$customer->id])}}" class="btn btn-success btn-xs fa fa-edit text-success"> Edit</a></td>
-                                        <td><a href="{{route('customer.deactivate',['id'=>$customer->id])}}" class="btn btn-warning btn-xs fa fa-remove"> De-activate</a></td>
+                                        <td><a href="{{route('customer.restore',['id'=>$customer->id])}}" class="btn btn-success btn-xs fa fa-edit text-success"> Restore</a></td>
+                                        <td><a href="{{route('customer.delete',['id'=>$customer->id])}}" class="btn btn-danger btn-xs fa fa-trash"> Delete</a></td>
 
                                     </tr>
                                 @endforeach

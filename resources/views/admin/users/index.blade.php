@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap.min.css')}}">
+@endsection
+
 @section('page-header')
     <section class="content-header">
         <h1>
@@ -24,7 +28,7 @@
                </div>
                <div class="box-body">
                    <div class="table-responsive">
-                       <table id="users" class="table table-striped table-bordered table-sm">
+                       <table id="users_list" class="table table-striped table-bordered table-sm">
                            <thead>
                            <tr>
                                <th>image</th>
@@ -50,6 +54,8 @@
                                    <td><a href="{{route('user.edit',['id'=>$user->id])}}" class="fa fa-edit text-success"></a></td>
                                    @if(Auth::id() !== $user->id)
                                        <td><a href="{{route('user.deactivated',['id'=>$user->id])}}" class="fa fa-trash-o text-danger"></a></td>
+                                   @else
+                                       <td></td>
                                    @endif
                                </tr>
                            @endforeach
@@ -68,4 +74,18 @@
        </div>
         <div class="col-lg-2"></div>
     </section>
+@endsection
+
+@section('scripts')
+    <!-- DataTables -->
+    <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
+
+    <script>
+        $(function () {
+            $('#users_list').DataTable()
+
+        })
+    </script>
+
 @endsection

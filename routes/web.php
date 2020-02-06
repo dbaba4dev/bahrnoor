@@ -105,7 +105,7 @@ Route::get('/customer/delete/{id}', ['uses'=>'CustomersController@delete', 'as'=
 
 Route::get('/customers/deactivated', ['uses'=>'CustomersController@trashes', 'as'=>'customers.trashes']);
 
-Route::get('/customer/deactivate/{id}', ['uses'=>'CustomersController@destroy', 'as'=>'customer.deactivated']);
+Route::get('/customer/deactivate/{id}', ['uses'=>'CustomersController@destroy', 'as'=>'customer.deactivate']);
 
 Route::get('/customer/restore/{id}', ['uses'=>'CustomersController@restore', 'as'=>'customer.restore']);
 

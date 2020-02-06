@@ -82,6 +82,7 @@ class EmployeesController extends Controller
             'phone'=>$request->phone
         ]);
 
+//        $employee->customers()->attach($request->customers());
 
         $notification = array(
             'message' => 'Employee created successfully!',

@@ -21,4 +21,9 @@ class Employee extends Model
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
 }

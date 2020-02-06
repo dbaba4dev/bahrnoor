@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap.min.css')}}">
+@endsection
+
 @section('page-header')
     <section class="content-header">
         <h1>
@@ -19,13 +23,14 @@
     <section class="content">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
+            <a href="{{route('area.create')}}" role="button" class="btn btn-primary fa fa-plus" style="margin-bottom: 1rem"> New Area</a>
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">All Areas</h3>
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
-                        <table id="users" class="table table-striped table-bordered table-sm">
+                        <table id="area_list" class="table table-striped table-bordered table-sm">
                             <thead>
                             <tr>
                                 <th>Name</th>
@@ -68,4 +73,18 @@
         </div>
         <div class="col-lg-2"></div>
     </section>
+@endsection
+
+@section('scripts')
+    <!-- DataTables -->
+    <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
+
+    <script>
+        $(function () {
+            $('#area_list').DataTable()
+
+        })
+    </script>
+
 @endsection

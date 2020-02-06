@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap.min.css')}}">
+@endsection
+
 @section('page-header')
     <section class="content-header">
         <h1>
@@ -24,7 +28,7 @@
                </div>
                <div class="box-body">
                    <div class="table-responsive">
-                       <table id="users" class="table table-striped table-sm">
+                       <table id="users_list" class="table table-striped table-sm">
                            <thead>
                            <tr>
                                <th>image</th>
@@ -59,4 +63,18 @@
        </div>
         <div class="col-lg-2"></div>
     </section>
+@endsection
+
+@section('scripts')
+    <!-- DataTables -->
+    <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
+
+    <script>
+        $(function () {
+            $('#users_list').DataTable()
+
+        })
+    </script>
+
 @endsection

@@ -20,8 +20,8 @@
 
 @section('content')
     <section class="content">
-{{--        <div class="col-lg-2"></div>--}}
-        <div class="col-lg-12">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
             @include('includes.errors')
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -31,67 +31,74 @@
                     {{csrf_field()}}
 
                     <div class="box-body">
+
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
+                                <div class="input-group">
+                                  <span class="input-group-addon">Name</span>
                                     <input type="text" name="name" class="form-control" value="{{old('name')}}">
-                                </div>
-                            </div>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
                             <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label for="area_id">Location</label>
+                                <div class="input-group">
+                                  <span class="input-group-addon">Location</span>
                                     <select name="area_id" id="area_id" class="form-control">
-                                        <option value="1">Abuja Talaka</option>
-                                        <option value="2">Bulunkutu</option>
-                                        <option value="3">Jidari</option>
+                                        <option value="" selected disabled>Select Area</option>
+                                        @foreach($areas as $area)
+                                            <option value="{{$area->id}}">{{$area->name}}</option>
+                                        @endforeach
+
                                     </select>
-                                </div>
-                            </div>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-3 -->
                             <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label for="employee_id">Vendor</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Vendor</span>
                                     <select name="employee_id" id="employee_id" class="form-control">
-                                        <option value="1">Dee Baba</option>
-                                        <option value="2">Y Baba</option>
-                                        <option value="3">M Baba</option>
+                                        <option value="" selected disabled>Select Sales Reps</option>
+                                        @foreach($employees as $employee)
+                                            <option value="{{$employee->id}}">{{$employee->name}}</option>
+                                        @endforeach
                                     </select>
-                                </div>
-                            </div>
-                        </div>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-3 -->
+                        </div><!-- /.row -->
+
+                        <br>
                         <div class="row">
-                            <div class="col-lg-8">
-                                <div class="form-group">
-                                    <label for="address">Address</label>
+                            <div class="col-lg-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Address</span>
                                     <input type="text" name="address" class="form-control" value="{{old('address')}}">
-                                </div>
-                            </div>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                    <input type="tel" name="phone"  placeholder="Enter phone number"  class="form-control" value="{{old('phone')}}">
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-3 -->
 
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="phone">Phone</label>
-                                    <input type="tel" name="phone"  class="form-control" value="{{old('phone')}}">
-                                </div>
-                            </div>
-                        </div>
+                        </div><!-- /.row -->
 
+                        <br>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="avatar">Upload picture</label>
-                                    <input type="file" name="avatar" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3"></div>
 
                             <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label for="credit_limit">Credit Limit</label>
-                                    <input type="number" name="credit_limit"  class="form-control" value="{{old('credit_limit')}}">
-                                </div>
-                            </div>
-                        </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Upload picture</span>
+                                    <input type="file" name="avatar" class="form-control">
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Credit limit (&#8358)</span>
+                                    <input type="number" name="credit_limit" id="credit_limit" min="0" class="form-control" value="{{old('credit_limit')}}">
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-3 -->
+                            <div class="col-lg-6"></div>
+                        </div><!-- /.row -->
+
 
                     </div>
                     <div class="box-footer">
@@ -106,7 +113,7 @@
                 </form>
             </div>
         </div>
-{{--        <div class="col-lg-2"></div>--}}
+        <div class="col-lg-1"></div>
     </section>
 @endsection
 
@@ -116,5 +123,18 @@
         $( function() {
             $( "#datepicker" ).datepicker();
         } );
+    </script>
+
+    <script>
+        var number = document.getElementById('credit_limit');
+
+        // Listen for input event on numInput.
+        number.onkeydown = function(e) {
+            if(!((e.keyCode  > 95 && e.keyCode  < 106)
+                || (e.keyCode  > 47 && e.keyCode  < 58)
+                || e.keyCode  === 8)) {
+                return false;
+            }
+        }
     </script>
 @endsection

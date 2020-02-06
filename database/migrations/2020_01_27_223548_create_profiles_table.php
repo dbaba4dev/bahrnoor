@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->default(0);
             $table->integer('employee_id')->default(0);
+            $table->integer('customer_id')->default(0);
             $table->string('avatar')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();

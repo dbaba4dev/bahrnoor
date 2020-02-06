@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
 use App\Customer;
 use App\Employee;
 use App\Profile;
@@ -17,7 +18,8 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        return view('admin.customers.index');
+        $customers = Customer::all();
+        return view('admin.customers.index', compact('customers'));
     }
 
     /**
@@ -29,8 +31,18 @@ class CustomersController extends Controller
     {
         $customers=Customer::all();
         $employees=Employee::all();
-        $customers=Customer::all();
-        return view('admin.customers.create',compact('customers'));
+        $areas=Area::all();
+
+        if (count($areas) == 0)
+        {
+            $notification = array(
+                'message' => 'You must have one or more Customer Area(s) added before creating customer',
+                'alert-type' => 'info'
+            );
+
+            return redirect()->route('area.create')->with($notification);
+        }
+        return view('admin.customers.create',compact('customers', 'areas', 'employees'));
     }
 
     /**
@@ -42,19 +54,19 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
         $this->validate($request,[
             'name'=>'required|unique:customers',
             'area_id'=>'required',
-            'employee_id'=>'required',
-            'credit_limit'=>'required'
+            'employee_id'=>'required'
         ]);
 
         $customer = Customer::create([
             'name'=>$request->name,
             'area_id'=>$request->area_id,
             'employee_id'=>$request->employee_id,
-            'credit_limit'=>$request->credit_limit,
-            'balance'=>$request->balance
+            'credit_limit'=>$request->credit_limit
+//            'balance'=>$request->balance
         ]);
 
         $avatar = '';
@@ -74,6 +86,7 @@ class CustomersController extends Controller
             'phone'=>$request->phone
         ]);
 
+//        $customer->employees->attach($request->employees);
 
         $notification = array(
             'message' => 'Customer created successfully!',
@@ -103,7 +116,10 @@ class CustomersController extends Controller
     public function edit($id)
     {
         $customer=Customer::findOrFail($id);
-        return view('admin.customers.edit',compact('customer'));
+        $employees=Employee::all();
+        $areas=Area::all();
+
+        return view('admin.customers.edit',compact('customer', 'employees','areas'));
     }
 
     /**
@@ -117,11 +133,9 @@ class CustomersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name'=>'required|unique:customers',
+            'name'=>'required',
             'area_id'=>'required',
-            'employee_id'=>'required',
-            'credit_limit'=>'required',
-            'balance'=>'required'
+            'employee_id'=>'required'
 
         ]);
 
@@ -139,7 +153,6 @@ class CustomersController extends Controller
         $customer->area_id=$request->area_id;
         $customer->employee_id=$request->employee_id;
         $customer->credit_limit=$request->credit_limit;
-        $customer->balance=$request->balance;
 
         $customer->profile->customer_id=$id;
         $customer->profile->address=$request->address;
@@ -167,13 +180,56 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         $customer = Customer::findOrFail($id);
+        $customer->profile->delete();
         $customer->delete();
 
         $notification = array(
-            'message' => 'Customer record delete successfully!',
+            'message' => 'Customer record deleted and backup in trashed can.',
+            'alert-type' => 'warning'
+        );
+
+        return redirect()->route('customers')->with($notification);
+    }
+
+    public function trashes()
+    {
+        $customers = Customer::onlyTrashed()->get();
+        $profiles = Profile::onlyTrashed()->get();
+        return view('admin.customers.trashes', compact('customers','profiles'));
+    }
+
+    public function restore($id)
+    {
+        $customer = Customer::where('id',$id)->onlyTrashed()->first();
+        $profile=Profile::where('customer_id',$id)->onlyTrashed()->first();
+
+        $customer->restore();
+        $profile->restore();
+
+        $notification = array(
+            'message' => 'Customer record restored!!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('customers')->with($notification);
+    }
+
+    public function delete($id)
+    {
+        $customer = Customer::where('id',$id)->onlyTrashed()->first();
+        $profile=Profile::where('customer_id',$id)->onlyTrashed()->first();
+
+
+        $profile->forceDelete();
+        $customer->forceDelete();
+
+        $notification = array(
+            'message' => 'Permanently deleted Customer record!!',
             'alert-type' => 'error'
         );
 
         return redirect()->route('customers')->with($notification);
     }
+
+
 }
