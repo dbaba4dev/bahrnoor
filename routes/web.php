@@ -86,6 +86,14 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function (){
 
     Route::post('/employee/profile/update/{id}',['uses'=>'EmployeesController@update', 'as'=>'employee.profile.update']);
 
+
+    Route::get('/records', ['uses'=>'RecordsController@index', 'as'=>'records']);
+    Route::post('/record/store', ['uses'=>'RecordsController@store', 'as'=>'record.store']);
+
+    Route::get('/settings', ['uses'=>'SettingsController@index', 'as'=>'settings']);
+    Route::post('/settings/update', ['uses'=>'SettingsController@update_info', 'as'=>'settings.info.update']);
+    Route::post('/settings/update/price', ['uses'=>'SettingsController@update_price', 'as'=>'settings.price.update']);
+
 });
 
 Route::get('/user/profile',['uses'=>'ProfilesController@index', 'as'=>'user.profile']);
@@ -114,3 +122,7 @@ Route::post('/customer/profile/update/{id}',['uses'=>'CustomersController@update
 Route::get('/customers/locations', ['uses'=>'CustomersController@locations', 'as'=>'customers.locations']);
 
 Route::resource('customer/area', 'CustomerAreasController');
+
+
+
+

@@ -19,9 +19,10 @@
 @endsection
 
 @section('content')
-    <section class="content">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10">
+    <section class="content customer_page">
+        <div class="col-xl-1"></div>
+        <div class="col-xl-10 col-sm-12 customer_list">
+            <a href="{{route('customer.create')}}" role="button" class="btn btn-primary fa fa-plus" style="margin-bottom: 1rem"> New Customer</a>
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Customers list</h3>
@@ -77,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-1"></div>
+        <div class="col-xl-1"></div>
     </section>
 @endsection
 

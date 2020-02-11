@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link rel="stylesheet" href="{{asset('css/all.css')}}">
+    <link rel="stylesheet" href="{{asset('css/global.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/toastr.min.css')}}">
 
@@ -82,9 +83,11 @@
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
+                    @if(Auth::user()->admin)
+                        <li>
+                            <a href="{{route('settings')}}"><i class="fa fa-gears"></i></a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </nav>
@@ -195,6 +198,21 @@
                     </li>
 
                @endif
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-book"></i> <span>Transactions</span>
+                        <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('records')}}"><i class="fa fa-circle-o"></i> Records</a></li>
+{{--                        <li><a href="{{route('employee.create')}}"><i class="fa fa-circle-o"></i> New Employee</a></li>--}}
+{{--                        <li><a href="{{route('trashes')}}"><i class="fa fa-circle-o"></i> Deactivated Employees</a></li>--}}
+
+                    </ul>
+                </li>
 
                 <li class="">
                     <a href="{{route('user.profile')}}">

@@ -93,7 +93,7 @@
                             <div class="col-lg-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">Credit limit (&#8358)</span>
-                                    <input type="number" name="credit_limit" id="credit_limit" min="0" class="form-control" value="{{old('credit_limit')}}">
+                                    <input type="number" name="credit_limit" id="credit_limit" min="0" class="form-control" value="0">
                                 </div><!-- /input-group -->
                             </div><!-- /.col-lg-3 -->
                             <div class="col-lg-6"></div>

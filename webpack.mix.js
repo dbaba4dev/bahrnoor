@@ -12,7 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/global.scss', 'public/css');
 
 mix.styles([
     'resources/css/bootstrap.min.css',
@@ -27,7 +28,6 @@ mix.scripts([
     'resources/js/jquery.min.js',
     'resources/js/bootstrap.min.js',
     'resources/js/jquery.slimscroll.min.js',
-    'resources/js/jquery.min.js',
     'resources/js/fastclick.js',
     'resources/js/adminlte.min.js',
     'resources/js/demo.js'

@@ -86,9 +86,9 @@
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}"
                                                 @if($category->id == $employee->category->id)
-                                                    selected >
+                                                    selected
                                                 @endif
-                                                {{$category->name}}</option>
+                                                >{{$category->name}}</option>
                                             @endforeach
                                         </select>
 

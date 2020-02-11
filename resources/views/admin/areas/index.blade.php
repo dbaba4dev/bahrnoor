@@ -21,8 +21,8 @@
 
 @section('content')
     <section class="content">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
             <a href="{{route('area.create')}}" role="button" class="btn btn-primary fa fa-plus" style="margin-bottom: 1rem"> New Area</a>
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -71,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-1"></div>
     </section>
 @endsection
 

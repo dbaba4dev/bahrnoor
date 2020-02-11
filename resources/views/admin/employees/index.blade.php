@@ -33,6 +33,7 @@
                            <tr>
                                <th>Image</th>
                                <th>Name</th>
+                               <th>Role</th>
                                <th>Balance</th>
                                <th>phone</th>
                                <th>Detail</th>
@@ -50,6 +51,7 @@
                                                alt="" height="50px" width="50px" class="img-circle">
                                        </td>
                                        <td>{{$employee->name}}</td>
+                                       <td>{{$employee->category->name}}</td>
                                        <td>&#8358 {{$employee->balance}}</td>
                                        <td>{{$employee->profile->phone}}</td>
                                        <td><a href="{{route('employee.edit',['id'=>$employee->id])}}" class="fa fa-eye text-success"></a></td>

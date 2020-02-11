@@ -26,4 +26,9 @@ class Customer extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+
+    public function bags()
+    {
+        return $this->hasMany(Bag::class);
+    }
 }
