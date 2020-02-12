@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Bag;
+use App\Commission;
 use App\Customer;
 use App\Employee;
 use App\Order;
 use App\Setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -103,6 +105,18 @@ class RecordsController extends Controller
 
                 Bag::create($data);
             }
+
+            /*Get Commission Detail for this Employee*/
+            $employee = Commission::where('employee_id',$request->employee_id)->where('created_at', Carbon::now()->toDateString())->first();
+
+            if (empty($employee))
+            {
+                
+            }else
+            {
+
+            }
+
             $notification = array(
                 'message' => 'Record updated successfully!',
                 'alert-type' => 'success'
@@ -110,12 +124,6 @@ class RecordsController extends Controller
 
             return redirect()->back()->with($notification);
         }
-
-
-
-//     die();
-
-
 
     }
 
@@ -162,5 +170,10 @@ class RecordsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function commission()
+    {
+        dd('am in...................!!!');
     }
 }

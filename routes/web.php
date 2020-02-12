@@ -89,6 +89,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function (){
 
     Route::get('/records', ['uses'=>'RecordsController@index', 'as'=>'records']);
     Route::post('/record/store', ['uses'=>'RecordsController@store', 'as'=>'record.store']);
+    Route::post('/commission', ['uses'=>'RecordsController@commission', 'as'=>'commission']);
 
     Route::get('/settings', ['uses'=>'SettingsController@index', 'as'=>'settings']);
     Route::post('/settings/update', ['uses'=>'SettingsController@update_info', 'as'=>'settings.info.update']);
